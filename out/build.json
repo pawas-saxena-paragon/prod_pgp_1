@@ -1,0 +1,224 @@
+{
+  "secrets": [],
+  "events": {
+    "47a37361-c3c7-4ec0-8993-99cc0d21f508": {
+      "id": "47a37361-c3c7-4ec0-8993-99cc0d21f508",
+      "sampleData": {
+        "title": "Example Title",
+        "description": "Example Description",
+        "storyPointEstimate": 0
+      },
+      "name": "New Task"
+    }
+  },
+  "integrations": {
+    "klaviyo": {
+      "id": "ca87d518-0c32-486d-9679-ab3260a15c60",
+      "name": "klaviyo",
+      "workflows": {
+        "5080566e-24fe-49a8-b058-d63dfce20aa5": {
+          "id": "5080566e-24fe-49a8-b058-d63dfce20aa5",
+          "name": "pgph-wf-1",
+          "steps": [
+            {
+              "id": "2778e24b-e4a0-473a-9c1e-631f3a94c4ed",
+              "type": "TRIGGER/EVENT",
+              "parameters": {
+                "eventId": "47a37361-c3c7-4ec0-8993-99cc0d21f508"
+              },
+              "next": "9466dc79-826b-49b6-b2b0-a82b2a8912c1",
+              "_migrations": {
+                "name": "triggerStep"
+              },
+              "description": "description"
+            },
+            {
+              "id": "9466dc79-826b-49b6-b2b0-a82b2a8912c1",
+              "type": "ACTION/FUNCTION",
+              "parameters": {
+                "parameters": [],
+                "code": "function yourFunction(parameters, libraries) {\n                return 'hello world';\n            }",
+                "retryOnFailure": false
+              },
+              "next": null,
+              "_migrations": {
+                "name": "functionStepStep"
+              },
+              "description": "Function Step"
+            }
+          ],
+          "isDraft": false
+        },
+        "6e4c53f9-5c90-452b-88e9-2098774c49d2": {
+          "id": "6e4c53f9-5c90-452b-88e9-2098774c49d2",
+          "name": "Testing WF",
+          "steps": [
+            {
+              "id": "b89a2c11-4db3-4fc6-8264-76f1036216e6",
+              "type": "TRIGGER/ENDPOINT",
+              "parameters": {
+                "httpMethod": "POST",
+                "paramValidations": [
+                  {
+                    "key": "isDay",
+                    "required": true
+                  }
+                ],
+                "headerValidations": [],
+                "bodyValidations": [],
+                "allowArbitraryPayload": false,
+                "path": "6e4c53f9-5c90-452b-88e9-2098774c49d2"
+              },
+              "next": "b3d8d802-43aa-4f9b-b9ee-f09f3089213d",
+              "_migrations": {},
+              "description": "description"
+            },
+            {
+              "id": "b3d8d802-43aa-4f9b-b9ee-f09f3089213d",
+              "type": "ACTION/RESPONSE",
+              "parameters": {
+                "statusCode": 200,
+                "responseType": "JSON",
+                "bodyData": [
+                  {
+                    "key": "body_key",
+                    "source": {
+                      "type": "VARIABLE",
+                      "stepId": "b89a2c11-4db3-4fc6-8264-76f1036216e6",
+                      "path": [
+                        "request",
+                        "params"
+                      ],
+                      "dataType": "ANY"
+                    }
+                  }
+                ]
+              },
+              "next": null,
+              "_migrations": {},
+              "description": "description"
+            }
+          ],
+          "isDraft": false
+        }
+      },
+      "config": {
+        "id": "f3b6f72d-52c5-403d-86a1-6f9ab4ad5a08",
+        "values": {
+          "paragonLink": true,
+          "description": "Sync list subscribers to Klaviyo",
+          "overview": "Connect your Klaviyo account to add new subscribers to your Klaviyo lists or campaigns. Grow your business and reach more customers by automating your email marketing with our Klaviyo integration.\n   \n\nOur Klaviyo integration enables you to:\n   \n\n• Automatically add new subscribers to lists or campaigns in Klaviyo\n• Create or manage lists or campaigns in Klaviyo\n• Sync subscribers from Klaviyo lists",
+          "accentColor": "#ee6451",
+          "workflowMeta": {
+            "5080566e-24fe-49a8-b058-d63dfce20aa5": {
+              "id": "5080566e-24fe-49a8-b058-d63dfce20aa5",
+              "hidden": false,
+              "defaultEnabled": false,
+              "inputs": [],
+              "infoText": ""
+            },
+            "6e4c53f9-5c90-452b-88e9-2098774c49d2": {
+              "id": "6e4c53f9-5c90-452b-88e9-2098774c49d2",
+              "hidden": false,
+              "defaultEnabled": false,
+              "inputs": [],
+              "infoText": "Add a user-facing description of this workflow",
+              "order": 0
+            }
+          },
+          "sharedMeta": {
+            "inputs": []
+          }
+        }
+      },
+      "customTriggers": {}
+    },
+    "googleCalendar": {
+      "id": "6daeb864-0da1-41f7-99c7-fd94e4461c4c",
+      "name": "googleCalendar",
+      "workflows": {
+        "77121b89-1a93-4f9e-a952-a3cfb7b2d4d7": {
+          "id": "77121b89-1a93-4f9e-a952-a3cfb7b2d4d7",
+          "name": "test wf 1",
+          "steps": [
+            {
+              "id": "7f0c67f5-3a49-403b-9d8c-72a1f76be3d1",
+              "type": "TRIGGER/ENDPOINT",
+              "parameters": {
+                "httpMethod": "POST",
+                "paramValidations": [
+                  {
+                    "key": "key",
+                    "required": true
+                  }
+                ],
+                "headerValidations": [],
+                "bodyValidations": [],
+                "allowArbitraryPayload": false,
+                "path": "77121b89-1a93-4f9e-a952-a3cfb7b2d4d7"
+              },
+              "next": "a15eb04e-6c1f-4b8a-9736-c68c933b89a1",
+              "_migrations": {},
+              "description": "description"
+            },
+            {
+              "id": "a15eb04e-6c1f-4b8a-9736-c68c933b89a1",
+              "type": "ACTION/RESPONSE",
+              "parameters": {
+                "statusCode": 200,
+                "responseType": "JSON",
+                "bodyData": [
+                  {
+                    "key": "body_key",
+                    "source": {
+                      "type": "VARIABLE",
+                      "stepId": "7f0c67f5-3a49-403b-9d8c-72a1f76be3d1",
+                      "path": [
+                        "request",
+                        "params"
+                      ],
+                      "dataType": "ANY"
+                    }
+                  }
+                ]
+              },
+              "next": null,
+              "_migrations": {},
+              "description": "description"
+            }
+          ],
+          "isDraft": false
+        }
+      },
+      "config": {
+        "id": "94521620-53cf-4d1b-a8d6-148f232ef10c",
+        "values": {
+          "paragonLink": true,
+          "description": "Sync events with Google Calendar",
+          "overview": "Connect your Google account and sync events with your Google Calendar. Increase your productivity by ensuring your schedule is always up to date - without manual data entry.\n \nOur Google Calendar integration enables you to:\n \n• Automatically add new events to your Google Calendar\n• Sync events from your Google Calendar",
+          "accentColor": "#3966D0",
+          "workflowMeta": {
+            "77121b89-1a93-4f9e-a952-a3cfb7b2d4d7": {
+              "id": "77121b89-1a93-4f9e-a952-a3cfb7b2d4d7",
+              "hidden": false,
+              "defaultEnabled": false,
+              "inputs": [],
+              "infoText": "Add a user-facing description of this workflow",
+              "order": 0
+            }
+          },
+          "sharedMeta": {
+            "inputs": []
+          }
+        }
+      },
+      "customTriggers": {}
+    }
+  },
+  "projectId": "7d0946de-f959-44c9-94b3-bf7d85891706",
+  "persona": {
+    "meta": {}
+  },
+  "resources": {},
+  "buildHash": "1QJ3iMgFTOeAlY3XvHxyqv/OAi0="
+}
