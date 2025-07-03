@@ -1,4 +1,4 @@
-import { EventStep, FunctionStep, UnselectedStep, Workflow } from '@useparagon/core';
+import { EventStep, FunctionStep, RequestStep, Workflow } from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
 import { IPersona } from '@useparagon/core/persona';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
@@ -39,16 +39,34 @@ export default class extends Workflow<
       code: function yourFunction(parameters, libraries) {
         return 'hello world';
       },
-      parameters: {},
+      parameters: {
+        a:'1',
+      },
     });
 
-    triggerStep.nextStep(functionStepStep);
+  const requestStep = new RequestStep({
+      autoRetry: false,
+      continueWorkflowOnError: false,
+      description: 'variable testing',
+      url: `https://webhook.site/d5f30f01-04e7-4bba-a360-f94e3fbe54a5`,
+      method: 'POST',
+      params: { ['']: '' },
+      headers: {},
+      body: {
+        prop1: `${functionStepStep.output.result}`,
+        props3and4: [{prop3: `${functionStepStep.output.result}`, prop4: `${functionStepStep.output.result}` }],
+      },
+      bodyType: 'json',
+    });
+
+    triggerStep.nextStep(functionStepStep).nextStep(requestStep);
+    
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep, functionStepStep });
+    return this.register({ triggerStep, functionStepStep, requestStep });
   }
 
   /**
