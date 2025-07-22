@@ -1,6 +1,7 @@
 import { IIntegrationConfig } from '@useparagon/core/integration';
 
 import { default as TestingWf } from './workflows/testingWf';
+import { default as Wf2 } from './workflows/wf2';
 
 /**
  * configuration for a klaviyo
@@ -17,7 +18,7 @@ Our Klaviyo integration enables you to:
 • Create or manage lists or campaigns in Klaviyo
 • Sync subscribers from Klaviyo lists`,
   showWatermark: true,
-  workflowDisplayOrder: [TestingWf],
+  workflowDisplayOrder: [TestingWf, Wf2],
 };
 
 export default config;

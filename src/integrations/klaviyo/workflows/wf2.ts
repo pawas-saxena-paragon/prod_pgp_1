@@ -1,4 +1,9 @@
-import { EventStep, FunctionStep, RequestStep, Workflow } from '@useparagon/core';
+import {
+  EventStep,
+  FunctionStep,
+  RequestStep,
+  Workflow,
+} from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
 import { IPersona } from '@useparagon/core/persona';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
@@ -9,11 +14,11 @@ import {
   InputResultMap,
 } from '@useparagon/integrations/klaviyo';
 
+import event from '../../../events/newTask';
 import personaMeta from '../../../persona.meta';
 
-
 /**
- * pgph-wf-1 Workflow implementation
+ * wf2 Workflow implementation
  */
 export default class extends Workflow<
   IKlaviyoIntegration,
@@ -28,10 +33,7 @@ export default class extends Workflow<
     context: IContext<InputResultMap>,
     connectUser: IConnectUser<IPersona<typeof personaMeta>>,
   ) {
-    const triggerStep = new EventStep({
-      name: 'New Task', 
-      schema: {"a": "b"}
-    });
+    const triggerStep = new EventStep(event);
 
     const functionStepStep = new FunctionStep({
       autoRetry: false,
@@ -39,28 +41,25 @@ export default class extends Workflow<
       code: function yourFunction(parameters, libraries) {
         return 'hello world';
       },
-      parameters: {
-        a:'1',
-      },
+      parameters: {},
     });
 
-  const requestStep = new RequestStep({
+    const requestStep = new RequestStep({
       autoRetry: false,
       continueWorkflowOnError: false,
       description: 'variable testing',
       url: `https://webhook.site/d5f30f01-04e7-4bba-a360-f94e3fbe54a5`,
       method: 'POST',
-      params: { ['']: '' },
+      params: {},
       headers: {},
       body: {
         prop1: `${functionStepStep.output.result}`,
-        props3and4: [{prop3: `${functionStepStep.output.result}`, prop4: `${functionStepStep.output.result}` }],
+        props3and4: `[{"prop3":"${functionStepStep.output.result}","prop4":"${functionStepStep.output.result}"}]`,
       },
       bodyType: 'json',
     });
 
     triggerStep.nextStep(functionStepStep).nextStep(requestStep);
-    
 
     /**
      * Pass all steps used in the workflow to the `.register()`
@@ -72,7 +71,7 @@ export default class extends Workflow<
   /**
    * The name of the workflow, used in the Dashboard and Connect Portal.
    */
-  name: string = 'pgph-wf-1';
+  name: string = 'wf2';
 
   /**
    * A user-facing description of the workflow shown in the Connect Portal.
@@ -114,5 +113,5 @@ export default class extends Workflow<
   /**
    * This property is maintained by Paragon. Do not edit this property.
    */
-  readonly id: string = '5080566e-24fe-49a8-b058-d63dfce20aa5';
+  readonly id: string = '17737fd0-09cf-42dd-a660-2ac2cac9b54a';
 }
