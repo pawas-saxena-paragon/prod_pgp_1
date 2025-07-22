@@ -1,4 +1,9 @@
-import { EndpointStep, ResponseStep, Workflow } from '@useparagon/core';
+import {
+  EndpointStep,
+  FunctionStep,
+  ResponseStep,
+  Workflow,
+} from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
 import { IPersona } from '@useparagon/core/persona';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
@@ -10,6 +15,7 @@ import {
 } from '@useparagon/integrations/googleCalendar';
 
 import personaMeta from '../../../persona.meta';
+import sharedInputs from '../inputs';
 
 /**
  * test wf 1 Workflow implementation
@@ -43,16 +49,28 @@ export default class extends Workflow<
       description: 'description',
       statusCode: 200,
       responseType: 'JSON',
-      body: { body_key: triggerStep.output.request.params },
+      body: {
+        body_key: triggerStep.output.request.params,
+        body_key_2: context.getInput(sharedInputs.demo),
+      },
     });
 
-    triggerStep.nextStep(responseStep);
+    const functionStep = new FunctionStep({
+      autoRetry: false,
+      description: 'description',
+      code: function yourFunction(parameters, libraries) {
+        return typeof parameters.p1;
+      },
+      parameters: { p1: context.getInput(sharedInputs.demo) },
+    });
+
+    triggerStep.nextStep(responseStep).nextStep(functionStep);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep, responseStep });
+    return this.register({ triggerStep, responseStep, functionStep });
   }
 
   /**
