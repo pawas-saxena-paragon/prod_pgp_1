@@ -61,7 +61,7 @@ export default class extends Workflow<
       code: function yourFunction(parameters, libraries) {
         return typeof parameters.p1;
       },
-      parameters: { p1: context.getInput(sharedInputs.demo) },
+      parameters: { p1: '' },
     });
 
     triggerStep.nextStep(responseStep).nextStep(functionStep);

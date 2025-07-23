@@ -14,7 +14,7 @@ const integrationInputs = createInputs({
     customDropdownOptions: [
       {
         label: 'Example Field 1',
-        value: 2,
+        value: 1,
       },
     ],
   },
