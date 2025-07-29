@@ -1,6 +1,6 @@
 import { IIntegrationConfig } from '@useparagon/core/integration';
 
-import { default as NewWorkflow } from './workflows/newWorkflow';
+import { default as DemoWf2 } from './workflows/demoWf2';
 import { default as TestWf1 } from './workflows/testWf 1';
 
 /**
@@ -15,7 +15,7 @@ Our Google Calendar integration enables you to:
 • Automatically add new events to your Google Calendar
 • Sync events from your Google Calendar`,
   showWatermark: true,
-  workflowDisplayOrder: [TestWf1, NewWorkflow],
+  workflowDisplayOrder: [TestWf1, DemoWf2],
 };
 
 export default config;

@@ -12,7 +12,7 @@ import {
 import personaMeta from '../../../persona.meta';
 
 /**
- * New Workflow Workflow implementation
+ * demo wf2 Workflow implementation
  */
 export default class extends Workflow<
   IGoogleCalendarIntegration,
@@ -29,7 +29,12 @@ export default class extends Workflow<
   ) {
     const triggerStep = new EndpointStep({
       allowArbitraryPayload: false,
-      paramValidations: [] as const,
+      paramValidations: [
+        {
+          key: 'k1',
+          required: true,
+        },
+      ] as const,
       headerValidations: [] as const,
       bodyValidations: [] as const,
     });
@@ -38,29 +43,22 @@ export default class extends Workflow<
       autoRetry: false,
       description: 'description',
       code: function yourFunction(parameters, libraries) {},
-      parameters: {},
+      parameters: { p1: triggerStep.output.request.params.k1 },
     });
 
-    const functionStep1 = new FunctionStep({
-      autoRetry: false,
-      description: 'description',
-      code: function yourFunction(parameters, libraries) {},
-      parameters: {},
-    });
-
-    triggerStep.nextStep(functionStep).nextStep(functionStep1);
+    triggerStep.nextStep(functionStep);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep, functionStep, functionStep1 });
+    return this.register({ triggerStep, functionStep });
   }
 
   /**
    * The name of the workflow, used in the Dashboard and Connect Portal.
    */
-  name: string = 'New Workflow';
+  name: string = 'demo wf2';
 
   /**
    * A user-facing description of the workflow shown in the Connect Portal.
