@@ -12,7 +12,7 @@ import {
 import personaMeta from '../../../persona.meta';
 
 /**
- * demo wf2 Workflow implementation
+ * deployTest2 Workflow implementation
  */
 export default class extends Workflow<
   IGoogleCalendarIntegration,
@@ -31,7 +31,7 @@ export default class extends Workflow<
       allowArbitraryPayload: false,
       paramValidations: [
         {
-          key: 'k1',
+          key: 'key',
           required: true,
         },
       ] as const,
@@ -39,31 +39,33 @@ export default class extends Workflow<
       bodyValidations: [] as const,
     });
 
-    const functionStep = new FunctionStep({
+    const functionStepStep = new FunctionStep({
       autoRetry: false,
-      description: 'description',
-      code: function yourFunction(parameters, libraries) {},
-      parameters: { p1: triggerStep.output.request.params.k1 },
+      description: 'Function Step',
+      code: function yourFunction(parameters, libraries) {
+        return 'hello world';
+      },
+      parameters: {},
     });
 
-    triggerStep.nextStep(functionStep);
+    triggerStep.nextStep(functionStepStep);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep, functionStep });
+    return this.register({ triggerStep, functionStepStep });
   }
 
   /**
    * The name of the workflow, used in the Dashboard and Connect Portal.
    */
-  name: string = 'demo wf2';
+  name: string = 'deployTest2';
 
   /**
    * A user-facing description of the workflow shown in the Connect Portal.
    */
-  description: string = 'Add a user-facing description of this workflow';
+  description: string = '';
 
   /**
    * Define workflow-level User Settings. For integration-level User
@@ -100,5 +102,5 @@ export default class extends Workflow<
   /**
    * This property is maintained by Paragon. Do not edit this property.
    */
-  readonly id: string = '59390d0a-c891-4aef-a975-0f74c2fb98a6';
+  readonly id: string = '2c30f11e-9965-4e49-af72-5e6026ba6172';
 }

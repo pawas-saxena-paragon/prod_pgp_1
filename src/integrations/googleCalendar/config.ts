@@ -1,12 +1,14 @@
 import { IIntegrationConfig } from '@useparagon/core/integration';
 
-import { default as DemoWf2 } from './workflows/demoWf2';
+import { default as Deploytest1 } from './workflows/deploytest1';
+import { default as Deploytest2 } from './workflows/deploytest2';
 import { default as TestWf1 } from './workflows/testWf 1';
 
 /**
  * configuration for a googleCalendar
  */
 const config: IIntegrationConfig = {
+  active: true,
   description: 'Sync events with Google Calendar',
   overviewText: `Connect your Google account and sync events with your Google Calendar. Increase your productivity by ensuring your schedule is always up to date - without manual data entry.
  
@@ -15,7 +17,7 @@ Our Google Calendar integration enables you to:
 • Automatically add new events to your Google Calendar
 • Sync events from your Google Calendar`,
   showWatermark: true,
-  workflowDisplayOrder: [TestWf1, DemoWf2],
+  workflowDisplayOrder: [TestWf1, Deploytest1, Deploytest2],
 };
 
 export default config;
