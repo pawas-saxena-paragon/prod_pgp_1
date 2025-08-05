@@ -1,5 +1,6 @@
 import { IIntegrationConfig } from '@useparagon/core/integration';
 
+import { default as DeployTest1 } from './workflows/deployTest 1';
 import { default as Deploytest1 } from './workflows/deploytest1';
 import { default as Deploytest2 } from './workflows/deploytest2';
 import { default as TestWf1 } from './workflows/testWf 1';
@@ -17,7 +18,7 @@ Our Google Calendar integration enables you to:
 • Automatically add new events to your Google Calendar
 • Sync events from your Google Calendar`,
   showWatermark: true,
-  workflowDisplayOrder: [TestWf1, Deploytest1, Deploytest2],
+  workflowDisplayOrder: [TestWf1, Deploytest1, Deploytest2, DeployTest1],
 };
 
 export default config;

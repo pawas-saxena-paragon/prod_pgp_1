@@ -13,7 +13,7 @@ import event from '../../../events/newTask';
 import personaMeta from '../../../persona.meta';
 
 /**
- * New Workflow Workflow implementation
+ * deploy test 1 Workflow implementation
  */
 export default class extends Workflow<
   IGoogleCalendarIntegration,
@@ -49,7 +49,7 @@ export default class extends Workflow<
   /**
    * The name of the workflow, used in the Dashboard and Connect Portal.
    */
-  name: string = 'New Workflow';
+  name: string = 'deploy test 1';
 
   /**
    * A user-facing description of the workflow shown in the Connect Portal.
