@@ -1,4 +1,4 @@
-import { EndpointStep, FunctionStep, Workflow } from '@useparagon/core';
+import { FunctionStep, UnselectedStep, Workflow } from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
 import { IPersona } from '@useparagon/core/persona';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
@@ -27,17 +27,7 @@ export default class extends Workflow<
     context: IContext<InputResultMap>,
     connectUser: IConnectUser<IPersona<typeof personaMeta>>,
   ) {
-    const triggerStep = new EndpointStep({
-      allowArbitraryPayload: false,
-      paramValidations: [
-        {
-          key: 'key',
-          required: true,
-        },
-      ] as const,
-      headerValidations: [] as const,
-      bodyValidations: [] as const,
-    });
+    const triggerStep = new UnselectedStep();
 
     const functionStepStep = new FunctionStep({
       autoRetry: false,
