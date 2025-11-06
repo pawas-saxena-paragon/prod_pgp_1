@@ -1,4 +1,10 @@
-import { EventStep, FunctionStep, Workflow } from '@useparagon/core';
+import {
+  EventStep,
+  FanOutStep,
+  FunctionStep,
+  RequestStep,
+  Workflow,
+} from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
 import { IPersona } from '@useparagon/core/persona';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
@@ -33,17 +39,49 @@ export default class extends Workflow<
     const functionStep = new FunctionStep({
       autoRetry: false,
       description: 'description',
+      code: function yourFunction(parameters, libraries) {
+        return new Array(4).fill('').map((_, i) => i);
+      },
+      parameters: {},
+    });
+
+    const mapStep = new FanOutStep({
+      description: 'description',
+      iterator: functionStep.output.result,
+    });
+
+    const functionStep1 = new FunctionStep({
+      autoRetry: false,
+      description: 'description',
       code: function yourFunction(parameters, libraries) {},
       parameters: {},
     });
 
-    triggerStep.nextStep(functionStep);
+    const requestStep = new RequestStep({
+      autoRetry: false,
+      continueWorkflowOnError: false,
+      description: 'description',
+      url: `https://example-failure${mapStep.output.instance}.com`,
+      method: 'GET',
+      params: {},
+      headers: {},
+    });
+
+    triggerStep
+      .nextStep(functionStep)
+      .nextStep(mapStep.branch(functionStep1.nextStep(requestStep)));
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep, functionStep });
+    return this.register({
+      triggerStep,
+      functionStep,
+      mapStep,
+      functionStep1,
+      requestStep,
+    });
   }
 
   /**
