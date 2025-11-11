@@ -67,9 +67,40 @@ export default class extends Workflow<
       headers: {},
     });
 
+    const mapStep1 = new FanOutStep({
+      description: 'description',
+      iterator: functionStep.output.result,
+    });
+
+    const functionStep2 = new FunctionStep({
+      autoRetry: false,
+      description: 'description',
+      code: function yourFunction(parameters, libraries) {},
+      parameters: {},
+    });
+
+    const requestStep1 = new RequestStep({
+      autoRetry: false,
+      continueWorkflowOnError: false,
+      description: 'description',
+      url: `https://jingaLala-${mapStep1.output.instance}.com`,
+      method: 'GET',
+      params: {},
+      headers: {},
+    });
+
+    const functionStep3 = new FunctionStep({
+      autoRetry: false,
+      description: 'description',
+      code: function yourFunction(parameters, libraries) {},
+      parameters: {},
+    });
+
     triggerStep
       .nextStep(functionStep)
-      .nextStep(mapStep.branch(functionStep1.nextStep(requestStep)));
+      .nextStep(mapStep.branch(functionStep1.nextStep(requestStep)))
+      .nextStep(mapStep1.branch(functionStep2.nextStep(requestStep1)))
+      .nextStep(functionStep3);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
@@ -81,6 +112,10 @@ export default class extends Workflow<
       mapStep,
       functionStep1,
       requestStep,
+      mapStep1,
+      functionStep2,
+      requestStep1,
+      functionStep3,
     });
   }
 
