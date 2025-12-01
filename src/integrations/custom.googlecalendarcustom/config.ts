@@ -13,7 +13,7 @@ export const inputs = createConfigInputs({});
  */
 const config: ICustomIntegrationConfig = {
   name: 'googlecalendarcustom',
-  active: false,
+  active: true,
   description: 'googlecalendarcustom description',
   accentColor: '#000000',
   overviewText: '',
