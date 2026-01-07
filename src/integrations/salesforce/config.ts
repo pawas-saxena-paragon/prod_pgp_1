@@ -13,7 +13,7 @@ Our Salesforce integration enables you to:
 • Automatically create or update records in Salesforce  
 • Sync records from Salesforce  
 • Receive updates when a record in Salesforce is created or updated`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 
