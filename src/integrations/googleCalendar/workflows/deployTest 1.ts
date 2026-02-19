@@ -49,6 +49,7 @@ export default class extends Workflow<
       url: `https://example.com?gatlin=123`,
       method: 'GET',
       params: { gatlin: '123' },
+      bodyType: 'json',
       headers: {},
     });
 

@@ -51,12 +51,12 @@ export default class extends Workflow<
       url: `https://webhook.site/d5f30f01-04e7-4bba-a360-f94e3fbe54a5`,
       method: 'POST',
       params: {},
+      bodyType: 'json',
       headers: {},
       body: {
         prop1: `${functionStepStep.output.result}`,
         props3and4: `[{"prop3":"${functionStepStep.output.result}","prop4":"${functionStepStep.output.result}"}]`,
       },
-      bodyType: 'json',
     });
 
     triggerStep.nextStep(functionStepStep).nextStep(requestStep);
