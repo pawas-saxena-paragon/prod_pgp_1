@@ -64,7 +64,6 @@ export default class extends Workflow<
       url: `https://example-failure${mapStep.output.instance}.com`,
       method: 'GET',
       params: {},
-      bodyType: 'json',
       headers: {},
     });
 
@@ -87,7 +86,6 @@ export default class extends Workflow<
       url: `https://jingaLala-${mapStep1.output.instance}.com`,
       method: 'GET',
       params: {},
-      bodyType: 'json',
       headers: {},
     });
 
