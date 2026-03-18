@@ -38,7 +38,7 @@ export default class extends Workflow<
       autoRetry: false,
       continueWorkflowOnError: false,
       description: 'description',
-      url: `https://example4.com`,
+      url: `https://www.example4-paw.com/`,
       method: 'GET',
       params: {},
       headers: {},

@@ -1,6 +1,7 @@
 import {
   ICustomIntegrationConfig,
   createConfigInputs,
+  credentials,
 } from '@useparagon/core/integration';
 
 /**
@@ -39,7 +40,7 @@ const config: ICustomIntegrationConfig = {
   testEndpointPath: `/users/me/calendarList`,
   authorization: {
     type: 'bearer',
-    token: `{{settings.oauthAccessToken}}`,
+    token: `${credentials.oauthAccessToken}`,
   },
 };
 export default config;
