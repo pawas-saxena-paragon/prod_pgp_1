@@ -1,5 +1,7 @@
 import { IIntegrationConfig } from '@useparagon/core/integration';
 
+import { default as ThreadCreated } from './workflows/threadCreated';
+
 /**
  * configuration for a gmail
  */
@@ -14,7 +16,7 @@ Our Gmail integration enables you to:
 • Read and extract data from incoming emails in your Gmail account inbox
 • Receive notifications upon receiving mail in your Gmail account inbox`,
   showWatermark: false,
-  workflowDisplayOrder: [],
+  workflowDisplayOrder: [ThreadCreated],
 };
 
 export default config;
