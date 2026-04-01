@@ -67,7 +67,7 @@ export default class extends Workflow<
    * a user connects their account to the integration.
    * https://docs.useparagon.com/connect-portal/displaying-workflows#default-to-enabled
    */
-  defaultEnabled: boolean = false;
+  defaultEnabled: boolean = true;
 
   /**
    * If set to true, the workflow will be hidden from all users from the
