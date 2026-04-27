@@ -31,7 +31,7 @@ export const inputs = createConfigInputs({
  */
 const config: ICustomIntegrationConfig = {
   name: 'bill.com demo',
-  active: false,
+  active: true,
   description: 'bill.com demo',
   accentColor: '#000000',
   overviewText: '',
