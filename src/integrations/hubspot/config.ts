@@ -1,5 +1,7 @@
 import { IIntegrationConfig } from '@useparagon/core/integration';
 
+import { default as FieldMappingTest1 } from './workflows/fieldMappingTest 1';
+
 /**
  * configuration for a hubspot
  */
@@ -16,7 +18,7 @@ Our HubSpot integration enables you to:
 • Sync records from HubSpot  
 • Receive updates when new records are created in HubSpot`,
   showWatermark: false,
-  workflowDisplayOrder: [],
+  workflowDisplayOrder: [FieldMappingTest1],
 };
 
 export default config;

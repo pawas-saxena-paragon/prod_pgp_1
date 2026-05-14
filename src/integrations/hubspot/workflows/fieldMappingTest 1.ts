@@ -10,6 +10,7 @@ import {
 } from '@useparagon/integrations/hubspot';
 
 import personaMeta from '../../../persona.meta';
+import sharedInputs from '../inputs';
 
 /**
  * field mapping test 1  Workflow implementation
@@ -28,10 +29,10 @@ export default class extends Workflow<
     connectUser: IConnectUser<IPersona<typeof personaMeta>>,
   ) {
     const triggerStep = new EndpointStep({
-      allowArbitraryPayload: false,
-      paramValidations: [] as const,
-      headerValidations: [] as const,
-      bodyValidations: [] as const,
+      allowArbitraryPayload: true,
+      objectMapping: `${
+        context.getInput(sharedInputs.field_title).custom_object_types
+      }`,
     });
 
     const functionStep = new FunctionStep({
